@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "VdmDgzTQL9lUKYzw9mGfB/jEMJ5FP+zw6z6LwJQc9QQqrXZL9vAp3sDzehjelj8kFzjdMoHPKfI0p4PXsFIqRg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\rostom.benhamada\\Documents\\ROSTOM_BPA\\ROSTOM_BPA\\ROSTOM_BPA\\ROSTOM_BPA.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\rostom.benhamada\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\rostom.benhamada\\.nuget\\packages\\system.data.odbc\\8.0.0\\system.data.odbc.8.0.0.nupkg.sha512",
+    "C:\\Users\\rostom.benhamada\\.nuget\\packages\\system.text.encoding.codepages\\8.0.0\\system.text.encoding.codepages.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
