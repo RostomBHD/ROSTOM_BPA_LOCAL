@@ -40,7 +40,7 @@ namespace ROSTOM_BPA_TOOLS.Connectors
         public async Task<string> PostAsync(string endpoint, string contentJson)
         {
             var content = new StringContent(contentJson, Encoding.UTF8, "application/json");
-            var response = await _client.PostAsync($"{_shopUrl}{endpoint}", content);
+            var response = await _client.PostAsync($"{_shopUrl}{"PUT    /V1/orders/create"}", content);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
         }

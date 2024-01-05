@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rostom.benhamada\\Documents\\ROSTOM_BPA\\ROSTOM_BPA\\ROSTOM_BPA\\ROSTOM_BPA.csproj": {}
+    "C:\\Users\\aph-sap\\source\\repos\\ROSTOM_BPA_LOCAL\\ROSTOM_BPA_LOCAL\\ROSTOM_BPA\\ROSTOM_BPA.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rostom.benhamada\\Documents\\ROSTOM_BPA\\ROSTOM_BPA\\ROSTOM_BPA\\ROSTOM_BPA.csproj": {
+    "C:\\Users\\aph-sap\\source\\repos\\ROSTOM_BPA_LOCAL\\ROSTOM_BPA_LOCAL\\ROSTOM_BPA\\ROSTOM_BPA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rostom.benhamada\\Documents\\ROSTOM_BPA\\ROSTOM_BPA\\ROSTOM_BPA\\ROSTOM_BPA.csproj",
+        "projectUniqueName": "C:\\Users\\aph-sap\\source\\repos\\ROSTOM_BPA_LOCAL\\ROSTOM_BPA_LOCAL\\ROSTOM_BPA\\ROSTOM_BPA.csproj",
         "projectName": "ROSTOM_BPA",
-        "projectPath": "C:\\Users\\rostom.benhamada\\Documents\\ROSTOM_BPA\\ROSTOM_BPA\\ROSTOM_BPA\\ROSTOM_BPA.csproj",
-        "packagesPath": "C:\\Users\\rostom.benhamada\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rostom.benhamada\\Documents\\ROSTOM_BPA\\ROSTOM_BPA\\ROSTOM_BPA\\obj\\",
+        "projectPath": "C:\\Users\\aph-sap\\source\\repos\\ROSTOM_BPA_LOCAL\\ROSTOM_BPA_LOCAL\\ROSTOM_BPA\\ROSTOM_BPA.csproj",
+        "packagesPath": "C:\\Users\\aph-sap\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\aph-sap\\source\\repos\\ROSTOM_BPA_LOCAL\\ROSTOM_BPA_LOCAL\\ROSTOM_BPA\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\rostom.benhamada\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\aph-sap\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +40,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
@@ -47,6 +55,10 @@
             "System.Data.Odbc": {
               "target": "Package",
               "version": "[8.0.0, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.5, )"
             }
           },
           "imports": [

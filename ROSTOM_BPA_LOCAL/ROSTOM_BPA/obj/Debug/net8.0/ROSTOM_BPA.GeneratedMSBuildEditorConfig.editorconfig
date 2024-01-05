@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ROSTOM_BPA
-build_property.ProjectDir = C:\Users\rostom.benhamada\Documents\ROSTOM_BPA\ROSTOM_BPA\ROSTOM_BPA\
+build_property.ProjectDir = C:\Users\aph-sap\source\repos\ROSTOM_BPA_LOCAL\ROSTOM_BPA_LOCAL\ROSTOM_BPA\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

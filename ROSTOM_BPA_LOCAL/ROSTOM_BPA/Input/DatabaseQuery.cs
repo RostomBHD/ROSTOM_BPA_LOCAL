@@ -1,5 +1,6 @@
-﻿using System.Data;
-using System.Data.Odbc;
+﻿using System;
+using System.Data;
+using System.Data.SqlClient; // Use the SqlConnection and SqlCommand classes for ADO.NET
 
 namespace ROSTOM_BPA_TOOLS.Input
 {
@@ -7,12 +8,12 @@ namespace ROSTOM_BPA_TOOLS.Input
     {
         public DataTable ExecuteQuery(string connectionString, string query)
         {
-            using (OdbcConnection conn = new OdbcConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                using (OdbcCommand cmd = new OdbcCommand(query, conn))
+                using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     conn.Open();
-                    OdbcDataAdapter adapter = new OdbcDataAdapter(cmd);
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
                     adapter.Fill(dataTable);
                     return dataTable;

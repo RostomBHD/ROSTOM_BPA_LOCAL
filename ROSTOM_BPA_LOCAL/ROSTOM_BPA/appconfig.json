@@ -1,0 +1,12 @@
+{
+  "ConnectionStrings": {
+    "MyDbConnection": "Data Source=MAN-DEM-SAP1;Initial Catalog=SBODEMOGBNA;User ID=aphsap;Password=wa!H35@H;Connect Timeout=30;Encrypt=False"
+  },
+  // Add other configurations here if necessary
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning"
+    }
+  },
+  "AllowedHosts": "*"
+}
