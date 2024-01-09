@@ -11,14 +11,16 @@ public class SAPServiceLayerConnector : IDisposable
 {
     private readonly HttpClient httpClient;
     private readonly IConfiguration configuration;
+    private readonly ILogger<SAPServiceLayerConnector> logger;
 
-    public SAPServiceLayerConnector(IConfiguration configuration)
+    public SAPServiceLayerConnector(IConfiguration configuration, ILogger<SAPServiceLayerConnector> logger)
     {
         var handler = new HttpClientHandler();
-        handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator; // SSL Bypass
+        handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
         httpClient = new HttpClient(handler);
 
         this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
         var serviceLayerConfig = this.configuration.GetSection("SAPServiceLayerConfig");
         var serviceLayerUrl = serviceLayerConfig["ServiceLayerUrl"];
@@ -26,6 +28,8 @@ public class SAPServiceLayerConnector : IDisposable
         httpClient.BaseAddress = new Uri(serviceLayerUrl);
         httpClient.DefaultRequestHeaders.Accept.Clear();
         httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+        logger.LogInformation("SAPServiceLayerConnector initialized with URL: {Url}", serviceLayerUrl);
     }
 
     public async Task<string> LoginAsync()
@@ -38,8 +42,7 @@ public class SAPServiceLayerConnector : IDisposable
         var loginInfo = new { CompanyDB = companyDB, UserName = username, Password = password };
 
         var jsonContent = JsonConvert.SerializeObject(loginInfo);
-        Console.WriteLine($"Request URL: {httpClient.BaseAddress}Login");
-        Console.WriteLine($"Request Body: {jsonContent}");
+
 
         // ... existing code to send the request ...
 
@@ -65,35 +68,42 @@ public class SAPServiceLayerConnector : IDisposable
     {
         try
         {
+            logger.LogInformation($"Attempting to retrieve data from {endpoint}");
+
+            // Correctly append the endpoint to the base URL
             string fullUrl = httpClient.BaseAddress.ToString().TrimEnd('/') + "/" + endpoint.TrimStart('/');
             HttpResponseMessage response = await httpClient.GetAsync(fullUrl);
+
             response.EnsureSuccessStatusCode();
+            logger.LogInformation($"Data retrieved successfully from {endpoint}");
+
             return await response.Content.ReadAsStringAsync();
         }
-        catch (HttpRequestException e)
+        catch (HttpRequestException ex)
         {
-            // Handle the error
-            Console.WriteLine($"Error retrieving data from {endpoint}: {e.Message}");
-            return null;
+            logger.LogError(ex, $"Error retrieving data from {endpoint}");
+            throw;
         }
     }
+
 
     public async Task<string> CreateEntityAsync<T>(string endpoint, T entity)
     {
         try
         {
+            logger.LogInformation($"Attempting to create entity at {endpoint}");
             string fullUrl = httpClient.BaseAddress.ToString().TrimEnd('/') + "/" + endpoint.TrimStart('/');
             var jsonContent = JsonConvert.SerializeObject(entity);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await httpClient.PostAsync(fullUrl, content);
             response.EnsureSuccessStatusCode();
+            logger.LogInformation($"Successfully created entity at {endpoint}");
             return await response.Content.ReadAsStringAsync();
         }
-        catch (HttpRequestException e)
+        catch (HttpRequestException ex)
         {
-            // Handle the error
-            Console.WriteLine($"Error creating entity at {endpoint}: {e.Message}");
-            return null;
+            logger.LogError(ex, $"Error creating entity at {endpoint}");
+            throw;
         }
     }
 
@@ -101,16 +111,18 @@ public class SAPServiceLayerConnector : IDisposable
     {
         try
         {
+            logger.LogInformation($"Attempting to update entity at {endpoint}");
             string fullUrl = httpClient.BaseAddress.ToString().TrimEnd('/') + "/" + endpoint.TrimStart('/');
             var jsonContent = JsonConvert.SerializeObject(entity);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await httpClient.PatchAsync(fullUrl, content);
             response.EnsureSuccessStatusCode();
+            logger.LogInformation($"Entity updated successfully at {endpoint}");
         }
-        catch (HttpRequestException e)
+        catch (HttpRequestException ex)
         {
-            // Handle the error
-            Console.WriteLine($"Error updating entity at {endpoint}: {e.Message}");
+            logger.LogError(ex, $"Error updating entity at {endpoint}");
+            throw;
         }
     }
 
@@ -118,20 +130,22 @@ public class SAPServiceLayerConnector : IDisposable
     {
         try
         {
+            logger.LogInformation($"Attempting to delete entity at {endpoint}");
             string fullUrl = httpClient.BaseAddress.ToString().TrimEnd('/') + "/" + endpoint.TrimStart('/');
             HttpResponseMessage response = await httpClient.DeleteAsync(fullUrl);
             response.EnsureSuccessStatusCode();
+            logger.LogInformation($"Entity deleted successfully at {endpoint}");
         }
-        catch (HttpRequestException e)
+        catch (HttpRequestException ex)
         {
-            // Handle the error
-            Console.WriteLine($"Error deleting entity at {endpoint}: {e.Message}");
+            logger.LogError(ex, $"Error deleting entity at {endpoint}");
+            throw;
         }
     }
-
 
     public void Dispose()
     {
         httpClient?.Dispose();
+        logger.LogInformation("HttpClient disposed");
     }
 }
