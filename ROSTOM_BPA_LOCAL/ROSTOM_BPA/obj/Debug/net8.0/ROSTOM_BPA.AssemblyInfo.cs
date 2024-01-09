@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ROSTOM_BPA")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8cbbb0be33629e8a55c6825bbc9561151ca6d9e6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+34f84e66fa05201e14ab2e3cf553084fc26d01f7")]
 [assembly: System.Reflection.AssemblyProductAttribute("ROSTOM_BPA")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ROSTOM_BPA")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

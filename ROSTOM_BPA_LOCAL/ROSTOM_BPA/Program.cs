@@ -1,23 +1,29 @@
 ﻿using System;
-using System.Data;
-using ROSTOM_BPA_TOOLS.Connectors;
-using ROSTOM_BPA_TOOLS.Input;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using System.Net;
+using ROSTOM_BPA_TOOLS.Connectors;  // Ensure this using directive is correct
 
-IConfiguration configuration = new ConfigurationBuilder()
-    .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("C:\\Users\\aph-sap\\source\\repos\\ROSTOM_BPA_LOCAL\\ROSTOM_BPA_LOCAL\\ROSTOM_BPA\\appconfig.json") 
-    .Build();
 
-string dbConnectionString = configuration.GetConnectionString("MyDbConnection");
+    
+        IConfiguration configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("C:\\Users\\aph-sap\\source\\repos\\ROSTOM_BPA_LOCAL\\ROSTOM_BPA_LOCAL\\ROSTOM_BPA\\appconfig.json") // Adjust the path as necessary
+            .Build();
 
-DatabaseQuery query = new DatabaseQuery();
-DataTable result = query.ExecuteQuery(dbConnectionString, "SELECT * FROM OCRD");
-result.TableName = "MyTable";
+        ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
 
-SqlRecordsetToXmlConverter converter = new SqlRecordsetToXmlConverter();
-string xmlString = converter.ConvertToXml(result);
+        var connector = new SAPServiceLayerConnector(configuration);
 
-Console.WriteLine("XML Data:");
-Console.WriteLine(xmlString);
+        // Call the LoginAsync function to authenticate
+        string loginResponse = await connector.LoginAsync();
+        Console.WriteLine("Login successful. Response: " + loginResponse);
+
+        // Assuming "BusinessPartners" is the correct endpoint
+        string ordersJson = await connector.GetEntityAsync("BusinessPartners");
+if (!string.IsNullOrEmpty(ordersJson))
+{
+    Console.WriteLine("Orders retrieved successfully:");
+    Console.WriteLine(ordersJson);
+}
+            // Additional processing of the data

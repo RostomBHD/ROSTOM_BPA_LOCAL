@@ -8,5 +8,13 @@
       "Default": "Warning"
     }
   },
-  "AllowedHosts": "*"
+  "AllowedHosts": "*",
+
+
+  "SAPServiceLayerConfig": {
+    "ServiceLayerUrl": "https://man-dem-sap1:50000/b1s/v1",
+    "CompanyDB": "SBODEMOGBNA",
+    "Username": "rostom",
+    "Password": "12345"
+  }
 }
